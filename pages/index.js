@@ -310,7 +310,7 @@ export default function Home() {
               <div className="pb-8">
                 <div className="flex justify-between items-center">
                   <h1 className="text-2xl sm:text-3xl font-bold text-[#F4C542]">
-                    SolarHashToken Presale
+                    SolarHashToken Private Sale
                   </h1>
                   <WalletMultiButton />
                 </div>
@@ -350,7 +350,7 @@ export default function Home() {
                   {icoData ? (
                     <div className="mb-8 p-4 rounded-lg border border-[#E58E26]/50 bg-[#094740]/30">
                       <h2 className="text-lg font-semibold mb-3 text-[#F4C542]">
-                        Presale Status
+                        ICO Status
                       </h2>
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         {[
