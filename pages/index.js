@@ -1,5 +1,9 @@
 // pages/index.js
 import React, { useState, useEffect } from "react";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import {
@@ -26,6 +30,7 @@ const WalletMultiButton = dynamic(
     ),
   { ssr: false }
 );
+const endTime = new Date("2025-04-01T00:00:00Z").getTime();
 
 const ENV_PROGRAM_ID = process.env.NEXT_PUBLIC_PROGRAM_ID;
 const ENV_ICO_MINT = process.env.NEXT_PUBLIC_ICO_MINT;
@@ -52,6 +57,14 @@ export default function Home() {
       fetchUserTokenBalance();
     }
   }, [wallet.connected]);
+
+  //useEffect for AOS initialization
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
 
   const getProgram = () => {
     if (!wallet.connected) return null;
@@ -267,7 +280,7 @@ export default function Home() {
         })
         .rpc();
 
-      alert(`Successfully purchased ${amount} tokens!`);
+      alert(`Successfully purchased ${amount} tokens! 20% has been released`);
       await fetchIcoData();
       await fetchUserTokenBalance();
     } catch (error) {
@@ -301,21 +314,35 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#09463F] via-[#0A4942] to-[#F4C542] text-white flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-12">
-      <div className="relative max-w-xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-[#09463F] via-[#0A4942] to-[#F4C542] text-white flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 py-12">
+      <div className="relative max-w-xl mx-0" data-aos="fade-up">
         <div className="relative px-6 py-10 bg-[#0A4942] shadow-lg rounded-3xl sm:p-12 border border-[#F4C542]/50">
           <div className="max-w-md mx-auto">
             <div className="divide-y divide-[#094740]">
               {/* Header Section */}
-              <div className="pb-8">
+              {/* Header Section */}
+              <div className="">
                 <div className="flex justify-between items-center">
-                  <h1 className="text-2xl sm:text-3xl font-bold text-[#F4C542]">
-                    SolarHashToken Private Sale
-                  </h1>
-                  <WalletMultiButton />
+                  {/* Use motion.h1 for text animation */}
+                  <motion.h1
+                    className="text-lg font-bold text-[#F4C542]"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    SolarHashToken Presale
+                  </motion.h1>
+
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.2 }}
+                  >
+                    <WalletMultiButton />
+                  </motion.div>
                 </div>
                 {wallet.connected && (
-                  <div className="mt-4 text-sm text-gray-200">
+                  <div className="text-sm text-gray-200">
                     <p>
                       Wallet: {wallet.publicKey.toString().slice(0, 8)}...
                       {wallet.publicKey.toString().slice(-8)}
@@ -345,13 +372,20 @@ export default function Home() {
 
               {/* Main Content */}
               {wallet.connected ? (
-                <div className="py-8">
+                <div className="py-4">
                   {/* ICO Status Display */}
                   {icoData ? (
-                    <div className="mb-8 p-4 rounded-lg border border-[#E58E26]/50 bg-[#094740]/30">
-                      <h2 className="text-lg font-semibold mb-3 text-[#F4C542]">
-                        ICO Status
+                    <motion.div
+                      className="mb-4 p-4 rounded-lg border border-[#E58E26]/50 bg-[#094740]/30"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5, delay: 0.3 }}
+                    >
+                      <h2 className="text-lg font-semibold text-[#F4C542]">
+                        Private sale status
                       </h2>
+                      {/* Countdown Timer */}
+
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         {[
                           {
@@ -370,21 +404,26 @@ export default function Home() {
                             ).toString(),
                           },
                           {
-                            label: "Your Balance",
+                            label: "Your SHTP Balance",
                             value: userTokenBalance
                               ? (Number(userTokenBalance) / 1e9).toFixed(2)
                               : "0",
                           },
                         ].map(({ label, value }, i) => (
-                          <div key={i}>
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: 0.4 + i * 0.1 }}
+                          >
                             <p className="text-gray-300">{label}</p>
                             <p className="font-medium text-white">
                               {value} tokens
                             </p>
-                          </div>
+                          </motion.div>
                         ))}
                       </div>
-                    </div>
+                    </motion.div>
                   ) : (
                     isAdmin && (
                       <div className="mb-8 p-4 bg-[#F4C542]/20 rounded-lg border border-[#F4C542]">
@@ -397,25 +436,36 @@ export default function Home() {
 
                   {/* Action Section */}
                   <div className="space-y-4">
-                    <input
-                      type="number"
-                      value={amount}
-                      onChange={(e) => setAmount(e.target.value)}
-                      placeholder={
-                        isAdmin
-                          ? icoData
-                            ? "Amount of tokens to deposit"
-                            : "Amount of tokens to initialize"
-                          : "Amount of tokens to buy"
-                      }
-                      className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-[#F4C542] focus:border-[#F4C542]"
-                      min="1"
-                      step="1"
-                    />
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.5 }}
+                    >
+                      <input
+                        type="number"
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                        placeholder={
+                          isAdmin
+                            ? icoData
+                              ? "Amount of tokens to deposit"
+                              : "Amount of tokens to initialize"
+                            : "Amount of tokens to buy"
+                        }
+                        className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-[#F4C542] focus:border-[#F4C542]"
+                        min="1"
+                        step="1"
+                      />
+                    </motion.div>
 
                     {/* Cost Display for Users */}
                     {amount && !isAdmin && (
-                      <div className="p-4 bg-[#E58E26]/20 rounded-lg border border-[#E58E26] space-y-2">
+                      <motion.div
+                        className="p-4 bg-[#E58E26]/20 rounded-lg border border-[#E58E26] space-y-2"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        transition={{ duration: 0.4 }}
+                      >
                         <div className="flex justify-between">
                           <span>Token Amount:</span>
                           <span className="font-medium">{amount} tokens</span>
@@ -423,7 +473,7 @@ export default function Home() {
                         <div className="flex justify-between">
                           <span>Cost:</span>
                           <span className="font-medium">
-                            {(parseInt(amount) * 0.0005).toFixed(3)} SOL
+                            {(parseInt(amount) * 0.05).toFixed(3)} SOL
                           </span>
                         </div>
                         <div className="flex justify-between">
@@ -433,70 +483,96 @@ export default function Home() {
                         <div className="border-t pt-2 flex justify-between font-semibold">
                           <span>Total:</span>
                           <span>
-                            {(parseInt(amount) * 0.0005 + 0.000005).toFixed(6)}{" "}
+                            {(parseInt(amount) * 0.05 + 0.000005).toFixed(6)}{" "}
                             SOL
                           </span>
                         </div>
-                      </div>
+                      </motion.div>
                     )}
 
                     {/* Action Buttons */}
-                    <div className="space-y-3">
+                    <div
+                      className="space-y-3"
+                      data-aos="fade-up"
+                      data-aos-delay="200"
+                    >
                       {isAdmin ? (
                         <>
                           {!icoData && (
-                            <button
+                            <motion.button
                               onClick={createIcoAta}
                               disabled={loading}
                               className="w-full p-3 bg-[#F4C542] text-black font-semibold rounded-lg hover:bg-[#E58E26] disabled:bg-gray-500 transition"
+                              whileHover={{ scale: 1.03 }}
+                              whileTap={{ scale: 0.98 }}
                             >
                               {loading
                                 ? "Initializing..."
                                 : "Initialize Presale"}
-                            </button>
+                            </motion.button>
                           )}
                           {icoData && (
                             <>
-                              <button
+                              <motion.button
                                 onClick={depositIco}
                                 disabled={loading}
                                 className="w-full p-3 bg-[#F4C542] text-black font-semibold rounded-lg hover:bg-[#E58E26] disabled:bg-gray-500 transition"
+                                whileHover={{ scale: 1.03 }}
+                                whileTap={{ scale: 0.98 }}
                               >
                                 {loading ? "Depositing..." : "Deposit Tokens"}
-                              </button>
-                              <button
+                              </motion.button>
+                              <motion.button
                                 onClick={buyTokens}
                                 disabled={loading || !icoData}
                                 className="w-full p-3 bg-[#E58E26] text-white font-semibold rounded-lg hover:bg-[#F4C542] disabled:bg-gray-500 transition"
+                                whileHover={{ scale: 1.03 }}
+                                whileTap={{ scale: 0.98 }}
                               >
                                 {loading ? "Processing..." : "Buy Tokens"}
-                              </button>
+                              </motion.button>
                             </>
                           )}
                         </>
                       ) : (
-                        <button
+                        <motion.button
                           onClick={buyTokens}
                           disabled={loading || !icoData}
                           className="w-full p-3 bg-[#E58E26] text-white font-semibold rounded-lg hover:bg-[#F4C542] disabled:bg-gray-500 transition"
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.98 }}
                         >
                           {loading ? "Processing..." : "Buy Tokens"}
-                        </button>
+                        </motion.button>
                       )}
                     </div>
 
                     {/* Transaction Status */}
                     {loading && (
-                      <div className="text-center animate-pulse text-gray-300">
+                      <motion.div
+                        className="text-center text-gray-300"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{
+                          duration: 0.3,
+                          repeat: Infinity,
+                          repeatType: "reverse",
+                        }}
+                      >
                         Processing transaction...
-                      </div>
+                      </motion.div>
                     )}
                   </div>
                 </div>
               ) : (
-                <div className="py-8 text-center text-lg font-medium text-gray-200">
+                <motion.div
+                  className="text-lg font-medium text-gray-200"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
                   Please connect your wallet to continue
-                </div>
+                </motion.div>
               )}
             </div>
           </div>
