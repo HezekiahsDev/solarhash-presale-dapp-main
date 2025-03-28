@@ -158,10 +158,10 @@ export default function Home() {
         })
         .rpc();
 
-      alert("presale Phase initialized successfully!");
+      alert("ICO Phase initialized successfully!");
       await fetchIcoData();
     } catch (error) {
-      console.error("Error initializing presale phase:", error);
+      console.error("Error initializing ICO phase:", error);
       alert(`Error: ${error.message}`);
     } finally {
       setLoading(false);
@@ -342,7 +342,7 @@ export default function Home() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                   >
-                    SolarHashToken Presale
+                    SolarHashToken Private Sale
                   </motion.h1>
 
                   <motion.div
@@ -394,7 +394,7 @@ export default function Home() {
                       transition={{ duration: 0.5, delay: 0.3 }}
                     >
                       <h2 className="text-lg font-semibold text-[#F4C542]">
-                        Private sale status
+                        ICO status (Phase: Private sale)
                       </h2>
                       {/* Countdown Timer */}
 
@@ -408,7 +408,7 @@ export default function Home() {
                             label: "Tokens Sold",
                             value: icoData.tokensSold.toString(),
                           },
-                          { label: "Token Price", value: "0.0005 SOL" },
+                          { label: "Token Price", value: "0.0005SOL" },
                           {
                             label: "Available",
                             value: (
@@ -430,7 +430,7 @@ export default function Home() {
                           >
                             <p className="text-gray-300">{label}</p>
                             <p className="font-medium text-white">
-                              {value} tokens
+                              {value} SHTP
                             </p>
                           </motion.div>
                         ))}
@@ -440,7 +440,7 @@ export default function Home() {
                     isAdmin && (
                       <div className="mb-8 p-4 bg-[#F4C542]/20 rounded-lg border border-[#F4C542]">
                         <p className="text-[#E58E26]">
-                          A presale phase needs to be initialized
+                          An ICO phase needs to be initialized
                         </p>
                       </div>
                     )
@@ -485,7 +485,7 @@ export default function Home() {
                         <div className="flex justify-between">
                           <span>Cost:</span>
                           <span className="font-medium">
-                            {(parseInt(amount) * 0.05).toFixed(3)} SOL
+                            {(parseInt(amount) * 0.0005).toFixed(4)} SOL
                           </span>
                         </div>
                         <div className="flex justify-between">
@@ -495,7 +495,7 @@ export default function Home() {
                         <div className="border-t pt-2 flex justify-between font-semibold">
                           <span>Total:</span>
                           <span>
-                            {(parseInt(amount) * 0.05 + 0.000005).toFixed(6)}{" "}
+                            {(parseInt(amount) * 0.0005 + 0.000005).toFixed(6)}{" "}
                             SOL
                           </span>
                         </div>
@@ -518,9 +518,7 @@ export default function Home() {
                               whileHover={{ scale: 1.03 }}
                               whileTap={{ scale: 0.98 }}
                             >
-                              {loading
-                                ? "Initializing..."
-                                : "Initialize Presale"}
+                              {loading ? "Initializing..." : "Initialize ICO"}
                             </motion.button>
                           )}
                           {icoData && (
