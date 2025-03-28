@@ -342,7 +342,7 @@ export default function Home() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                   >
-                    SolarHashToken Private Sale
+                    SolarHashToken ICO
                   </motion.h1>
 
                   <motion.div
