@@ -223,11 +223,23 @@ export default function Home() {
         return;
       }
 
+      if (parseInt(amount) < 100) {
+        alert("Please enter an amount greater than 100 and try again");
+        return;
+      }
+
+      if (parseInt(amount) > 3000000) {
+        alert(
+          "Please enter a lower amount and try again\nAmount must not be greater than 3000000"
+        );
+        return;
+      }
+
       setLoading(true);
       const program = getProgram();
       if (!program) return;
 
-      // Calculate cost (0.05 SOL per token)
+      // Calculate cost (0.05 USDT worth of sol per token)
       const solCost = parseInt(amount) * 0.0005;
       const balance = await connection.getBalance(wallet.publicKey);
 
@@ -450,7 +462,7 @@ export default function Home() {
                             ? icoData
                               ? "Amount of tokens to deposit"
                               : "Amount of tokens to initialize"
-                            : "Amount of tokens to buy"
+                            : "min:100 max:3000000"
                         }
                         className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-[#F4C542] focus:border-[#F4C542]"
                         min="1"
