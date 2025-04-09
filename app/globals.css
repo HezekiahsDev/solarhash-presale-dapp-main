@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Background */
+body {
+  background: none; /* amber to yellow gradient */
+  color: white; /* Default text color */
+  min-height: 100vh; /* Ensure the background covers the entire viewport */
+  font-family: "Orbitron", sans-serif;
+}
+
+/* globals.css */
+
+/* Custom Glow Effect */
+.glow-on-hover {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.glow-on-hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgb(252, 255, 53), 0 0 20px rgba(244, 196, 4, 0.856);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glow-on-hover:hover::before {
+  opacity: 1;
+}
+
+@keyframes snakeBorderMove {
+  0% {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+  10% {
+    border-top-color: #ffd700; /* Gold */
+  }
+  25% {
+    border-right-color: #ffa500; /* Orange */
+  }
+  50% {
+    border-bottom-color: #cb890f; /* Tomato (a shade of red/orange) */
+  }
+  75% {
+    border-left-color: #ffd700; /* Gold */
+  }
+  100% {
+    border-top-color: #ff9a47; /* Tomato (a shade of red/orange) */
+  }
+}
+
+.snake-border {
+  position: relative;
+  padding: 16px;
+  border-width: 4px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 32px;
+  animation: snakeBorderMove 4s infinite;
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-slide-left {
+  animation: slide-left 10s linear infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-slide {
+  display: inline-block;
+  animation: slide 20s linear infinite;
+}
