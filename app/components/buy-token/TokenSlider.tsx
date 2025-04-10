@@ -34,9 +34,9 @@ const TokenSlider: FC<Props> = ({ tokenAmount, setTokenAmount }) => {
         onChange={(e) => setTokenAmount(Number(e.target.value))}
         className="w-full mt-4 p-2 bg-amber-700 text-white rounded-lg border border-amber-500 text-center"
       />
-      <div className="flex justify-between text-gray-300 mt-2">
-        <span>100 Tokens</span>
-        <span>3,000,000 Tokens</span>
+      <div className="flex justify-between text-gray-300 mt-2 text-sm">
+        <span>100 SHTP</span>
+        <span>3,000,000 SHTP</span>
       </div>
     </div>
   );

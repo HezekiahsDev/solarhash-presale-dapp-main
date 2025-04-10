@@ -70,7 +70,8 @@ export default function Footer() {
                   link: "https://t.me/solarhashtokendiscussions",
                 },
                 { icon: FaReddit, link: "https://reddit.com/SolarHashToken" },
-                { icon: FaDiscord, link: "https://discord.gg/0x0sola" },
+                { icon: FaDiscord, link: "https://discord.gg/" },
+                { icon: FaGithub, link: "https://github.com/HezekiahsDev" },
               ].map(({ icon: Icon, link }, index) => (
                 <motion.a
                   key={index}
