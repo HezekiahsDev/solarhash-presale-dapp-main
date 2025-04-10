@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -117,11 +115,9 @@ const BuyTokens = () => {
   // Helper to get program instance
   const getProgram = () => {
     if (!wallet.connected) return null;
-    // @ts-expect-error sds
     const provider = new AnchorProvider(connection, wallet, {
       commitment: "confirmed",
     });
-    // @ts-expect-error sds
     return new Program(IDL, PROGRAM_ID, provider);
   };
 
@@ -352,7 +348,7 @@ const BuyTokens = () => {
       // Create ATA if needed
       try {
         await getAccount(connection, userIcoAta);
-      } catch (error) {
+      } catch (e) {
         const createAtaIx = createAssociatedTokenAccountInstruction(
           wallet.publicKey,
           userIcoAta,
@@ -589,7 +585,6 @@ const BuyTokens = () => {
                   </div>
                   <DepositToken
                     onClick={depositIco}
-                    // @ts-expect-error sds
                     loading={depositLoading}
                     text={depositLoading ? "Depositing..." : "Confirm Deposit"}
                   />
@@ -638,7 +633,6 @@ const BuyTokens = () => {
           {/* User Buy Button or Admin Initialize Button */}
           <BuyButton
             onClick={isAdmin && !icoData ? createIcoAta : buyTokens}
-            // @ts-expect-error sds
             loading={loading}
             text={
               loading
@@ -650,7 +644,6 @@ const BuyTokens = () => {
           />
 
           {/* Transaction Status */}
-
           {(loading || depositLoading) && (
             <motion.div
               className="text-center text-gray-300 mt-3"
