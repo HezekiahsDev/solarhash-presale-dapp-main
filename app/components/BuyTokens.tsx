@@ -643,10 +643,8 @@ const BuyTokens = () => {
               loading
                 ? "Processing..."
                 : isAdmin && !icoData
-                ? isAdmin && icoData
-                  ? "Initialize ICO"
-                  : "Buy Tokens"
-                : "Witdraw tokens"
+                ? "Initialize ICO"
+                : "Buy Tokens"
             }
           />
 
