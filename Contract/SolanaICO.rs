@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Mint, Token, TokenAccount};
 
-declare_id!("Hmb2q22dpvsxpFULG44ZeiL1vppLGW5sBjBXzbWXMtkD");
+declare_id!("GAeC7iqgXnhYzVvMNiYSGiddggm6zLHqu6qR5AP4GSeh");
 
 #[error_code]
 pub enum ErrorCode {
@@ -13,8 +13,8 @@ pub enum ErrorCode {
 
 #[program]
 pub mod ico {
-    pub const ICO_MINT_ADDRESS: &str = "E1H8fAGzzTaFuvW57gCzVcf7CxFsq4qtuyBdFLJ1nzNy";
-    pub const LAMPORTS_PER_TOKEN: u64 = 488_200; // 0.0005 SOL in lamports
+    pub const ICO_MINT_ADDRESS: &str = "6H4HZ8rFaMLZZGLevpRJzC3QCuxkX2wu15GpASXXzkuN";
+    pub const LAMPORTS_PER_TOKEN: u64 = 488_298; // 0.05USDC worth of lamports
     pub const TOKEN_DECIMALS: u64 = 1_000_000_000; // 10^9 for SPL token decimals
     use super::*;
 
@@ -76,40 +76,50 @@ pub mod ico {
         _ico_ata_for_ico_program_bump: u8,
         token_amount: u64,
     ) -> Result<()> {
+        let is_admin = ctx.accounts.user.key() == ctx.accounts.data.admin;
+
         // Convert token amount to include decimals for SPL transfer
         let raw_token_amount = token_amount
             .checked_mul(TOKEN_DECIMALS)
             .ok_or(ErrorCode::Overflow)?;
 
-        // Calculate 20% of tokens to be sent
-        let raw_token_amount_20 = raw_token_amount
-            .checked_div(5) // Equivalent to multiplying by 0.2
-            .ok_or(ErrorCode::Overflow)?;
+        let amount_to_transfer = if is_admin {
+            raw_token_amount // 100%
+        } else {
+            raw_token_amount
+                .checked_div(5) // 20%
+                .ok_or(ErrorCode::Overflow)?
+        };
 
-        // Calculate SOL cost (0.05 SOL per token)
-        let sol_amount = token_amount
-            .checked_mul(LAMPORTS_PER_TOKEN)
-            .ok_or(ErrorCode::Overflow)?;
+        if !is_admin {
+            // Calculate SOL cost (0.0005 SOL per token)
+            let sol_amount = token_amount
+                .checked_mul(LAMPORTS_PER_TOKEN)
+                .ok_or(ErrorCode::Overflow)?;
 
-        // Transfer SOL from user to admin
-        let ix = anchor_lang::solana_program::system_instruction::transfer(
-            &ctx.accounts.user.key(),
-            &ctx.accounts.admin.key(),
-            sol_amount,
-        );
-        anchor_lang::solana_program::program::invoke(
-            &ix,
-            &[
-                ctx.accounts.user.to_account_info(),
-                ctx.accounts.admin.to_account_info(),
-            ],
-        )?;
-        msg!("Transferred {} lamports to admin", sol_amount);
+            // Transfer SOL from user to admin
+            let ix = anchor_lang::solana_program::system_instruction::transfer(
+                &ctx.accounts.user.key(),
+                &ctx.accounts.admin.key(),
+                sol_amount,
+            );
+            anchor_lang::solana_program::program::invoke(
+                &ix,
+                &[
+                    ctx.accounts.user.to_account_info(),
+                    ctx.accounts.admin.to_account_info(),
+                ],
+            )?;
+            msg!("Transferred {} lamports to admin", sol_amount);
+        } else {
+            msg!("Admin purchase detected: skipping SOL transfer and token_sold update");
+        }
 
-        // Transfer 20% of tokens from program to user
+        // Transfer tokens from program ATA to user/admin
         let ico_mint_address = ctx.accounts.ico_mint.key();
         let seeds = &[ico_mint_address.as_ref(), &[_ico_ata_for_ico_program_bump]];
         let signer = [&seeds[..]];
+
         let cpi_ctx = CpiContext::new_with_signer(
             ctx.accounts.token_program.to_account_info(),
             token::Transfer {
@@ -119,20 +129,22 @@ pub mod ico {
             },
             &signer,
         );
-        token::transfer(cpi_ctx, raw_token_amount_20)?;
+        token::transfer(cpi_ctx, amount_to_transfer)?;
 
-        // Update tokens sold
-        let data = &mut ctx.accounts.data;
-        data.tokens_sold = data
-            .tokens_sold
-            .checked_add(token_amount)
-            .ok_or(ErrorCode::Overflow)?;
+        // Update tokens sold for non-admin users
+        if !is_admin {
+            let data = &mut ctx.accounts.data;
+            data.tokens_sold = data
+                .tokens_sold
+                .checked_add(token_amount)
+                .ok_or(ErrorCode::Overflow)?;
+        }
 
-        // Log the full purchase amount and the actual amount sent
         msg!(
-            "User purchased {} tokens, but only {} tokens (20%) were sent to the buyer.",
+            "{} purchased {} tokens. Sent {} tokens.",
+            if is_admin { "Admin" } else { "User" },
             token_amount,
-            token_amount / 5
+            amount_to_transfer / TOKEN_DECIMALS
         );
 
         Ok(())

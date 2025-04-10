@@ -10,7 +10,7 @@ import {
   PhantomWalletAdapter,
   SolflareWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
-import { clusterApiUrl } from "@solana/web3.js";
+// import { clusterApiUrl } from "@solana/web3.js";
 import { ReactNode, useMemo } from "react";
 
 // Import Solana wallet styles
@@ -26,7 +26,7 @@ export default function WalletProviderWrapper({
   children,
 }: WalletProviderWrapperProps) {
   // Configure the Solana network and wallets
-  const network = WalletAdapterNetwork.Mainnet; // Change to Mainnet for production
+  // const network = WalletAdapterNetwork.Mainnet; // Change to Mainnet for production
   const endpoint = useMemo(() => HELIUS_RPC_URL, []);
   const wallets = useMemo(
     () => [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
