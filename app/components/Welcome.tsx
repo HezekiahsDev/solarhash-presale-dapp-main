@@ -10,8 +10,8 @@ const Welcome = () => {
   }, []);
 
   return (
-    <section className="">
-      <div className="container mx-auto px-4 text-center space-x-8">
+    <section className="mb-20">
+      <div className="container mx-auto px-4 text-center">
         {/* Hero Title */}
         <h1 className="text-xl md:text-2xl font-bold" data-aos="fade-down">
           Solar Hash Token

@@ -50,7 +50,7 @@ const LitePaper = () => {
           <div className="py-1">
             <button
               onClick={handleViewLitepaper}
-              className="block w-full text-left hover:text-[16px] hover:text-amber-500 p-4 text-sm"
+              className="block w-full text-left hover:text-[16px] md:hover:text-amber-500 p-4 text-sm"
             >
               View Litepaper
             </button>
