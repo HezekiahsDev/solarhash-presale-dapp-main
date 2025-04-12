@@ -25,8 +25,8 @@ const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "#lite-paper", label: "Litepaper" },
   { href: "#project", label: "Projects" },
-  { href: "#about", label: "About us" },
-  { href: "#guide", label: "Buying Guide" },
+  { href: "/guide", label: "Buying Guide" },
+  { href: "#drop", label: "Airdrop" },
   { href: "#donate", label: "DONATE" },
 ];
 

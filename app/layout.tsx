@@ -13,7 +13,7 @@ export default function Layout({ children }: LayoutProps) {
     <html lang="en" className="h-full">
       <body className="h-full">
         <WalletProviderWrapper>
-          <div className="bg-gradient-to-b from-orange-600 to-orange-800 text-white">
+          <div className="">
             {/* Header Component */}
             <Header />
 
