@@ -56,7 +56,7 @@ const Header = () => {
             <Link
               key={href}
               href={href}
-              className="text-amber-500 font-bold text-xl hover:text-amber-300 transition-colors"
+              className="text-amber-500 font-bold text-xl hover:text-amber-300 hover:underline transition-colors"
               data-aos="fade-down"
               data-aos-delay={index * 100}
             >
