@@ -1,7 +1,7 @@
 import { cn } from "../../lib/utils";
 import { ButtonHTMLAttributes, forwardRef } from "react";
 
-type Variant =
+export type Variant =
   | "default"
   | "outline"
   | "action"
