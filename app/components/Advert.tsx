@@ -19,10 +19,7 @@ function Advert() {
       <div className="">
         <div className="relative">
           <video className="h-[320px] w-[720px]" controls>
-            <source
-              src="https://www.w3schools.com/html/movie.mp4"
-              type="video/mp4"
-            />
+            <source src="/Solarhash_assets/shtp.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
