@@ -15,7 +15,7 @@ function About() {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
       className="py-16 px-6 flex flex-col items-center text-center space-y-8 bg-cover bg-center text-white"
-      style={{ backgroundImage: "url('/Solarhash_assets/green_bg.gif')" }}
+      style={{ backgroundImage: "url('/Solarhash_assets/green_bg.png')" }}
     >
       {/* Title */}
       <motion.div
