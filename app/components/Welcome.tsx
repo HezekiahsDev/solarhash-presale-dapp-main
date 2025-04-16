@@ -35,7 +35,7 @@ const Welcome = () => {
         {/* Rotating Logo */}
         <div className="flex justify-center mb-8 animate-spin-slow">
           <Image
-            src="/Solarhash_assets/icon-nobg.png"
+            src="/Solarhash_assets/icon.png"
             alt="Solar Hash Logo"
             width={100}
             height={100}
