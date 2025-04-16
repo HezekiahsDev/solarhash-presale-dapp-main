@@ -42,7 +42,7 @@ const WalletMultiButton = dynamic(
 );
 
 // Set end time for the ICO
-const endTime = new Date("2025-05-20T23:59:59").getTime();
+const endTime = new Date("2025-05-30T23:59:59").getTime();
 
 // Environment variables
 const ENV_PROGRAM_ID = process.env.NEXT_PUBLIC_PROGRAM_ID;
@@ -90,15 +90,15 @@ const BuyTokens = () => {
     }
   }, [wallet.connected]);
 
-  // Phase simulation (could be replaced with actual phase logic from contract)
+  // Phase
   useEffect(() => {
     const secondsInDay = 24 * 60 * 60;
 
     const phases = [
-      { name: "Private Sale", price: 0.0005, duration: 40 * secondsInDay }, // 40 days in seconds
-      { name: "Pre-Sale Phase 1", price: 0.0007, duration: 20 * secondsInDay }, // 20 days in seconds
-      { name: "Pre-Sale Phase 2", price: 0.0009, duration: 20 * secondsInDay }, // 20 days in seconds
-      { name: "Pre-Sale Phase 3", price: 0.0012, duration: 20 * secondsInDay }, // 20 days in seconds
+      { name: "Private Sale", price: 0.0005, duration: 40 * secondsInDay },
+      { name: "Pre-Sale Phase 1", price: 0.0007, duration: 20 * secondsInDay },
+      { name: "Pre-Sale Phase 2", price: 0.0009, duration: 20 * secondsInDay },
+      { name: "Pre-Sale Phase 3", price: 0.0012, duration: 20 * secondsInDay },
     ];
 
     let currentTime = 0;
@@ -227,8 +227,7 @@ const BuyTokens = () => {
   const MAX_DEPOSIT_AMOUNT = 8000000;
   const MIN_DEPOSIT_AMOUNT = 100;
 
-  // Assuming `depositAmount`, `connection`, `wallet`, and `ICO_MINT` are already defined
-
+  //Program Interface
   const depositIco = async () => {
     try {
       // Validate deposit amount
@@ -251,7 +250,6 @@ const BuyTokens = () => {
 
       setDepositLoading(true);
 
-      // Assuming `getProgram` and `wallet.publicKey` are correctly initialized
       const program = getProgram();
       if (!program || !wallet.publicKey) return;
 
@@ -485,10 +483,9 @@ const BuyTokens = () => {
           </p>
         </div>
       )}
-
       {/* Countdown Timer */}
       <div className="py-4">
-        <CountdownTimer targetDate={new Date("2025-05-20T23:59:59")} />
+        <CountdownTimer targetDate={new Date("2025-05-30T23:59:59")} />
       </div>
 
       {wallet.connected ? (
@@ -502,7 +499,7 @@ const BuyTokens = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <h2 className="text-lg font-semibold text-[#F4C542]">
-                ICO status (Phase: {currentPhase})
+                ICO status (Phase: Private Sale)
               </h2>
 
               <div className="grid grid-cols-2 gap-4 text-sm mt-3">
