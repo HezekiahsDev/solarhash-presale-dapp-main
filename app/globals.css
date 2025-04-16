@@ -97,3 +97,10 @@ body {
   display: inline-block;
   animation: slide 20s linear infinite;
 }
+
+/* Custom Slow Spin Animation */
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 8s linear infinite;
+  }
+}

@@ -5,6 +5,7 @@ import "aos/dist/aos.css";
 import LitePaper from "./buttons/LitePaper";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import Image from "next/image"; // ✅ Import Next.js Image component
 
 const Welcome = () => {
   useEffect(() => {
@@ -12,7 +13,7 @@ const Welcome = () => {
   }, []);
 
   return (
-    <section className="mb-4 py-12">
+    <section className="mb-4 py-8">
       <div className="container mx-auto px-4 text-center max-w-3xl">
         {/* Hero Title */}
         <h1
@@ -31,6 +32,19 @@ const Welcome = () => {
           The bridge between crypto mining and green energy
         </p>
 
+        {/* Rotating Logo */}
+        <div className="flex justify-center mb-8 animate-spin-slow">
+          <Image
+            src="/Solarhash_assets/icon-nobg.png"
+            alt="Solar Hash Logo"
+            width={100}
+            height={100}
+            className="animate-spin-slow"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+          />
+        </div>
+
         {/* CTA Buttons */}
         <div
           className="flex flex-col sm:flex-row justify-center items-center gap-4"
@@ -38,16 +52,12 @@ const Welcome = () => {
           data-aos-delay="300"
         >
           <LitePaper />
-          <Link href={"/guide"}>
-            <Button variant="secondary" className="">
-              Buying Guide
-            </Button>
+          <Link href={"/guide"} data-aos="fade-right" data-aos-delay="300">
+            <Button variant="secondary">Buying Guide</Button>
           </Link>
 
-          <Link href={"/buy"}>
-            <Button variant="action" className="">
-              Buy Token
-            </Button>
+          <Link href={"/buy"} data-aos="fade-right" data-aos-delay="400">
+            <Button variant="action">Buy Token</Button>
           </Link>
         </div>
       </div>
