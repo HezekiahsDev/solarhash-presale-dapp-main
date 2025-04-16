@@ -4,6 +4,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import LitePaper from "./buttons/LitePaper";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 const Welcome = () => {
   useEffect(() => {
@@ -11,36 +12,43 @@ const Welcome = () => {
   }, []);
 
   return (
-    <section className="mb-20">
-      <div className="container mx-auto px-4 text-center">
+    <section className="mb-4 py-12">
+      <div className="container mx-auto px-4 text-center max-w-3xl">
         {/* Hero Title */}
-        <h1 className="text-2xl md:text-3xl font-bold" data-aos="fade-down">
+        <h1
+          className="text-3xl md:text-5xl font-extrabold text-white mb-4"
+          data-aos="fade-down"
+        >
           Solar Hash Token
         </h1>
 
         {/* Hero Subtitle */}
         <p
-          className="text-lg md:text-xl font-semibold p-4 text-gray-300"
+          className="text-base md:text-xl font-medium text-gray-300 mb-8"
           data-aos="fade-down"
           data-aos-delay="100"
         >
           The bridge between crypto mining and green energy
         </p>
 
-        {/* Token Sale Statistics */}
-        {/* <div
-          className="bg-amber-800 p-6 rounded-lg mb-8 inline-block"
+        {/* CTA Buttons */}
+        <div
+          className="flex flex-col sm:flex-row justify-center items-center gap-4"
           data-aos="fade-up"
           data-aos-delay="300"
         >
-          <h2 className="text-xl font-bold mb-2">Token Sale Progress</h2>
-          <p className="text-gray-300">$1,234,567 Raised of $5,000,000 Goal</p>
-        </div> */}
-
-        <div className=" " data-aos="fade-right" data-aos-delay="300">
           <LitePaper />
-          <Button variant="secondary">Buying Guide</Button>
-          <Button variant="action">Buy token</Button>
+          <Link href={"/guide"}>
+            <Button variant="secondary" className="">
+              Buying Guide
+            </Button>
+          </Link>
+
+          <Link href={"/buy"}>
+            <Button variant="action" className="">
+              Buy Token
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
