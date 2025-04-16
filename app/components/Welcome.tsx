@@ -56,8 +56,15 @@ const Welcome = () => {
             <Button variant="secondary">Buying Guide</Button>
           </Link>
 
-          <Link href={"/buy"} data-aos="fade-right" data-aos-delay="400">
-            <Button variant="action">Buy Token</Button>
+          <Link
+            className="glow-on-hover"
+            href={"/buy"}
+            data-aos="fade-right"
+            data-aos-delay="400"
+          >
+            <Button className="glow-on-hover" variant="action">
+              Buy Token
+            </Button>
           </Link>
         </div>
       </div>
