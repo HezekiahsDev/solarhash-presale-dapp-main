@@ -3,9 +3,9 @@ import Info from "./Info";
 
 function SHTP() {
   return (
-    <div>
+    <section id="info">
       <Info />
-    </div>
+    </section>
   );
 }
 

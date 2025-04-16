@@ -2,7 +2,8 @@ import React from "react";
 
 function Banner() {
   return (
-    <div
+    <section
+      id="banner"
       className="p-4  justify-center bg-cover bg-center border-b-4 border-green-900 overflow-hidden"
       style={{
         backgroundImage: "url('/Solarhash_assets/cloud.gif')",
@@ -13,7 +14,7 @@ function Banner() {
           🚀 Welcome to Solar Hash Family!🌟
         </p>
       </div>
-    </div>
+    </section>
   );
 }
 

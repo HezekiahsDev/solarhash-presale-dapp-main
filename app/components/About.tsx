@@ -3,9 +3,9 @@ import AboutUs from "./AboutUs";
 
 function About() {
   return (
-    <div>
+    <section id="about">
       <AboutUs />
-    </div>
+    </section>
   );
 }
 

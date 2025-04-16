@@ -3,9 +3,9 @@ import Featured from "./Featured";
 
 function Advert() {
   return (
-    <div>
+    <section id="advert">
       <Featured />
-    </div>
+    </section>
   );
 }
 
