@@ -13,7 +13,7 @@ const Welcome = () => {
   }, []);
 
   return (
-    <section className="mb-4 py-8">
+    <section className="">
       <div className="container mx-auto px-4 text-center max-w-3xl">
         {/* Hero Title */}
         <h1
