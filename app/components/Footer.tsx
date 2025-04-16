@@ -39,9 +39,9 @@ export default function Footer() {
             <ul className="space-y-2">
               {[
                 { label: "Home", href: "#home" },
-                { label: "Buy Tokens", href: "BuyTokens" },
-                { label: "Vesting", href: "#vesting" },
-                { label: "FAQ", href: "#faq" },
+                { label: "Buy Tokens", href: "/buy" },
+                { label: "Buying guide", href: "/guide" },
+                { label: "Airdrop", href: "/airdrop" },
               ].map((item, index) => (
                 <motion.li
                   key={index}

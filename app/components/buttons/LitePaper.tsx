@@ -2,6 +2,7 @@
 // @ts-nocheck
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import { Button } from "../ui/button";
 
 const LitePaper = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,12 +40,13 @@ const LitePaper = () => {
 
   return (
     <div ref={dropdownRef} className="relative inline-block text-left">
-      <button
+      <Button
         onClick={toggleDropdown}
-        className="bg-amber-600 hover:bg-amber-700 text-white text-base font-semibold py-2 px-4 rounded-lg glow-on-hover"
+        variant="outline"
+        className=" text-white text-base font-semibold "
       >
         Litepaper
-      </button>
+      </Button>
       {isOpen && (
         <div className="absolute z-50 mt-2 w-56 rounded-md shadow-lg bg-amber-300 bg-opacity-20 ring-1 ring-black ring-opacity-5">
           <div className="py-1">
