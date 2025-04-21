@@ -58,6 +58,40 @@ export default function FooterMenu() {
               ))}
             </ul>
           </div>
+          {/* Legal Links */}
+          <div data-aos="fade-up" data-aos-delay="150">
+            <h3 className="text-2xl font-bold mb-4">Legal</h3>
+            <ul className="space-y-2">
+              {[
+                {
+                  label: "Terms of Use",
+                  file: "/Solarhash_assets/terms_of_use.pdf",
+                },
+                {
+                  label: "Cookie Policy",
+                  file: "/Solarhash_assets/cookie_policy.pdf",
+                },
+                {
+                  label: "Privacy Policy",
+                  file: "/Solarhash_assets/privacy_policy.pdf",
+                },
+              ].map(({ label, file }, index) => (
+                <motion.li
+                  key={index}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 200 }}
+                >
+                  <a
+                    href={file}
+                    target="_blank"
+                    className="text-gray-300 hover:text-amber-300 transition-colors"
+                  >
+                    {label}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
 
           {/* Social Media Links */}
           <div data-aos="fade-up" data-aos-delay="200">
