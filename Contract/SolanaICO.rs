@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Mint, Token, TokenAccount};
 
-declare_id!("GAeC7iqgXnhYzVvMNiYSGiddggm6zLHqu6qR5AP4GSeh");
+declare_id!("5C4sm7Q8Mzywm6RWW1SX2hrPGhgUJz5fMDFmUEaFxcho");
 
 #[error_code]
 pub enum ErrorCode {
@@ -13,7 +13,7 @@ pub enum ErrorCode {
 
 #[program]
 pub mod ico {
-    pub const ICO_MINT_ADDRESS: &str = "6H4HZ8rFaMLZZGLevpRJzC3QCuxkX2wu15GpASXXzkuN";
+    pub const ICO_MINT_ADDRESS: &str = "C48WMWw5T2LHvisD37Zr6aACPcVodybALPiYxgraXgjU";
     pub const LAMPORTS_PER_TOKEN: u64 = 488_298; // 0.05USDC worth of lamports
     pub const TOKEN_DECIMALS: u64 = 1_000_000_000; // 10^9 for SPL token decimals
     use super::*;

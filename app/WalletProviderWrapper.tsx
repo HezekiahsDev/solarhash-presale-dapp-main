@@ -20,7 +20,7 @@ interface WalletProviderWrapperProps {
   children: ReactNode;
 }
 // Helius RPC Endpoint
-const HELIUS_RPC_URL = `https://devnet.helius-rpc.com/?api-key=02e72add-2a17-408d-89c3-5cb3192648fd`;
+const HELIUS_RPC_URL = `https://mainnet-beta.helius-rpc.com/?api-key=02e72add-2a17-408d-89c3-5cb3192648fd`;
 
 export default function WalletProviderWrapper({
   children,
