@@ -1,4 +1,4 @@
-export const GA_MEASUREMENT_ID = "G-XXXXXXXXXX"; // Replace with your GA4 ID
+export const GA_MEASUREMENT_ID = "G-KRH4SSNC9Y"; // Replace with your GA4 ID
 
 type GTagEvent = {
   action: string;
