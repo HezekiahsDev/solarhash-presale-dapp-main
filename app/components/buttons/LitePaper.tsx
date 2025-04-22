@@ -28,10 +28,21 @@ const LitePaper = () => {
   const litepaperUrl = "/Solarhash_assets/Litepaper.pdf";
 
   const handleViewLitepaper = () => {
+    gaEvent({
+      action: "download_litepaper",
+      category: "litepaper",
+      label: text,
+    });
     window.open(litepaperUrl, "_blank");
   };
 
   const handleDownloadLitepaper = () => {
+    // Fire Google Analytics Event
+    gaEvent({
+      action: "download_litepaper",
+      category: "litepaper",
+      label: text,
+    });
     const link = document.createElement("a");
     link.href = litepaperUrl;
     link.download = "Litepaper.pdf";

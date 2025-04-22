@@ -1,8 +1,7 @@
 "use client";
 
 import { FC } from "react";
-import { event as gaEvent } from "../../lib/gtag"; // Adjust import path if needed
-
+import { event as gaEvent } from "../../lib/gtag";
 type Props = {
   onClick: () => void;
   text: string;
