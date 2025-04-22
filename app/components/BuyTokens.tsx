@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-
 "use client";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -31,6 +30,7 @@ import CountdownTimer from "./utilities/CountdownTimer";
 // Import IDL
 import IDL from "../lib/idl.json";
 import DepositToken from "./buy-token/DepositToken";
+import { event as gaEvent } from "../lib/gtag";
 
 // Dynamically import WalletMultiButton with SSR disabled
 const WalletMultiButton = dynamic(
@@ -454,7 +454,13 @@ const BuyTokens = () => {
 
               transition: "background-color 0.5s ease",
             }}
-            className=""
+            onClick={() =>
+              gaEvent({
+                action: "click_connet_wallet",
+                category: "wallet connect",
+                label: "conect wallet",
+              })
+            }
           />
         </motion.div>
       </div>

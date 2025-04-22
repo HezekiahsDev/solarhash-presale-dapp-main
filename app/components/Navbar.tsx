@@ -13,6 +13,7 @@ import {
   faTelegram,
   faDiscord,
 } from "@fortawesome/free-brands-svg-icons";
+import { event as gaEvent } from "../lib/gtag";
 
 const SOCIAL_LINKS = [
   { href: "https://www.reddit.com", icon: faReddit },
@@ -56,6 +57,13 @@ const Navbar = () => {
             <Link
               key={href}
               href={href}
+              onClick={() =>
+                gaEvent({
+                  action: "click_nav_link",
+                  category: "navigation",
+                  label,
+                })
+              }
               className="text-amber-500 font-bold text-xl hover:text-amber-300 hover:underline transition-colors"
               data-aos="fade-down"
               data-aos-delay={index * 100}
@@ -67,7 +75,19 @@ const Navbar = () => {
 
         <div className="hidden md:flex space-x-4" data-aos="fade-left">
           {SOCIAL_LINKS.map(({ href, icon }) => (
-            <a key={href} href={href} target="_blank" rel="noopener noreferrer">
+            <a
+              key={href}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() =>
+                gaEvent({
+                  action: "click_social_link",
+                  category: "social",
+                  label: href,
+                })
+              }
+            >
               <FontAwesomeIcon icon={icon} className="text-black text-xl" />
             </a>
           ))}
@@ -88,6 +108,13 @@ const Navbar = () => {
                 cursor: "pointer",
                 transition: "background-color 0.3s ease",
               }}
+              onClick={() =>
+                gaEvent({
+                  action: "click_connet_wallet",
+                  category: "wallet connect",
+                  label: "conect wallet",
+                })
+              }
             />
           </div>
         </div>
@@ -118,11 +145,19 @@ const Navbar = () => {
             <a
               key={href}
               href={href}
+              onClick={() =>
+                gaEvent({
+                  action: "click_mobile_nav_link",
+                  category: "navigation",
+                  label,
+                })
+              }
               className="block py-2 px-4 text-amber-500 hover:bg-amber-700"
             >
               {label}
             </a>
           ))}
+
           <div className="py-2 px-4">
             {/* <WalletMultiButton
               style={{
@@ -145,6 +180,13 @@ const Navbar = () => {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  gaEvent({
+                    action: "click_mobile_social_link",
+                    category: "social",
+                    label: href,
+                  })
+                }
               >
                 <FontAwesomeIcon icon={icon} className="text-black text-xl" />
               </a>
