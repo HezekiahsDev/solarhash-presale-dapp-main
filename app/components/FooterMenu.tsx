@@ -11,6 +11,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { event as gaEvent } from "../lib/gtag";
 
 export default function FooterMenu() {
   // Initialize AOS (Animate on Scroll)
@@ -50,6 +51,13 @@ export default function FooterMenu() {
                 >
                   <Link
                     href={item.href}
+                    onClick={() =>
+                      gaEvent({
+                        action: "click_footer_quick_link",
+                        category: "footer",
+                        label: item.label,
+                      })
+                    }
                     className="text-gray-300 hover:text-amber-300 transition-colors"
                   >
                     {item.label}
@@ -81,13 +89,20 @@ export default function FooterMenu() {
                   whileHover={{ scale: 1.1 }}
                   transition={{ type: "spring", stiffness: 200 }}
                 >
-                  <a
+                  <Link
                     href={file}
                     target="_blank"
+                    onClick={() =>
+                      gaEvent({
+                        action: "click_footer_legal_doc",
+                        category: "footer",
+                        label,
+                      })
+                    }
                     className="text-gray-300 hover:text-amber-300 transition-colors"
                   >
                     {label}
-                  </a>
+                  </Link>
                 </motion.li>
               ))}
             </ul>
@@ -112,6 +127,13 @@ export default function FooterMenu() {
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    gaEvent({
+                      action: "click_footer_social",
+                      category: "social",
+                      label: link,
+                    })
+                  }
                   whileHover={{ scale: 1.2 }}
                   transition={{ type: "spring", stiffness: 200 }}
                   className="text-gray-300 hover:text-amber-300 transition-colors"
