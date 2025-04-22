@@ -14,6 +14,7 @@ const BuyButton: FC<Props> = ({ onClick, text }) => {
       action: "buy_button_click",
       category: "Presale",
       label: text,
+      value: 1,
     });
 
     // Then execute the provided onClick

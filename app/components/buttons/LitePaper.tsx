@@ -32,6 +32,7 @@ const LitePaper = () => {
       action: "download_litepaper",
       category: "litepaper",
       label: text,
+      value: 1,
     });
     window.open(litepaperUrl, "_blank");
   };
@@ -42,6 +43,7 @@ const LitePaper = () => {
       action: "download_litepaper",
       category: "litepaper",
       label: text,
+      value: 1,
     });
     const link = document.createElement("a");
     link.href = litepaperUrl;
