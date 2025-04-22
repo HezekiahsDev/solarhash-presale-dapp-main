@@ -3,6 +3,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "../ui/button";
+import { event as gaEvent } from "../../lib/gtag";
 
 const LitePaper = () => {
   const [isOpen, setIsOpen] = useState(false);
