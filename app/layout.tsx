@@ -6,7 +6,7 @@ import WalletProviderWrapper from "./WalletProviderWrapper";
 import Script from "next/script";
 import Analytics from "./components/Analytics";
 
-const GA_MEASUREMENT_ID = "G-KRH4SSNC9Y"; // 🔁 Replace with your GA4 ID
+const GA_MEASUREMENT_ID = "G-4P0BYZDPVV"; // 🔁 Replace with your GA4 ID
 
 export const metadata = {
   title: "Solar Hash Token",
