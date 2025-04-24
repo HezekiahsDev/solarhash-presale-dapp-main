@@ -295,16 +295,26 @@ const BuyTokens = () => {
     }
   };
 
-  // Buy tokens
   const buyTokens = async () => {
     try {
       if (!tokenAmount || tokenAmount <= 0) {
         alert("Please enter a valid amount");
+        gaEvent({
+          action: "purchase_failed",
+          category: "transaction",
+          label: "invalid_amount",
+        });
         return;
       }
 
       if (tokenAmount < 100) {
         alert("Please enter an amount greater than 100 and try again");
+        gaEvent({
+          action: "purchase_failed",
+          category: "transaction",
+          label: "amount_too_low",
+          value: tokenAmount,
+        });
         return;
       }
 
@@ -312,6 +322,12 @@ const BuyTokens = () => {
         alert(
           "Please enter a lower amount and try again\nAmount must not be greater than 3000000"
         );
+        gaEvent({
+          action: "purchase_failed",
+          category: "transaction",
+          label: "amount_too_high",
+          value: tokenAmount,
+        });
         return;
       }
 
@@ -319,7 +335,6 @@ const BuyTokens = () => {
       const program = getProgram();
       if (!program || !wallet.publicKey) return;
 
-      // Calculate cost based on current token price
       const solCost = tokenAmount * tokenPrice;
       const balance = await connection.getBalance(wallet.publicKey);
 
@@ -330,11 +345,22 @@ const BuyTokens = () => {
 
       if (balance < solCost * 1e9 + 5000) {
         alert(`Insufficient balance. Need ${solCost.toFixed(3)} SOL plus fee`);
+        gaEvent({
+          action: "purchase_failed",
+          category: "transaction",
+          label: "insufficient_balance",
+          value: tokenAmount,
+        });
         return;
       }
 
       if (!icoData || !icoData.admin) {
         alert("ICO data not available. Please try again later.");
+        gaEvent({
+          action: "purchase_failed",
+          category: "transaction",
+          label: "ico_data_unavailable",
+        });
         setLoading(false);
         return;
       }
@@ -349,7 +375,6 @@ const BuyTokens = () => {
         wallet.publicKey
       );
 
-      // Create ATA if needed
       try {
         await getAccount(connection, userIcoAta);
       } catch (e) {
@@ -378,6 +403,13 @@ const BuyTokens = () => {
         })
         .rpc();
 
+      gaEvent({
+        action: "purchase_success",
+        category: "transaction",
+        label: "token_purchase",
+        value: tokenAmount,
+      });
+
       setShowConfirmation(true);
       setTimeout(() => {
         setShowConfirmation(false);
@@ -390,6 +422,13 @@ const BuyTokens = () => {
       await fetchUserTokenBalance();
     } catch (error) {
       console.error("Error buying tokens:", error);
+
+      gaEvent({
+        action: "purchase_failed",
+        category: "transaction",
+        label: "unexpected_error",
+      });
+
       alert(`Error: ${error instanceof Error ? error.message : String(error)}`);
     } finally {
       setLoading(false);
