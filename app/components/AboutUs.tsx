@@ -32,7 +32,7 @@ function AboutUs() {
       {/* Content Section */}
       <motion.div
         data-aos="fade-up"
-        className="max-w-3xl space-y-6 bg-black bg-opacity-20 p-6 rounded-lg border-yellow-500 border"
+        className="pt-32 max-w-3xl space-y-6 bg-black bg-opacity-20 p-6 rounded-lg border-yellow-500 border"
       >
         <p className="text-base md:text-xl">
           <strong>Solar Hash Token (SHTP)</strong> is an innovative

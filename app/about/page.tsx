@@ -1,11 +1,14 @@
 import React from "react";
-import Airdrop from "../components/Airdrop";
+
+import AboutSolarHashToken from "../components/AboutSolarHashToken";
+import SolarHashTeam from "../components/SolarHashTeam";
 
 function AboutUsPage() {
   return (
-    <div className="flex flex-col">
+    <div className="min-h-screen bg-teal-800 px-4 text-white flex flex-col items-center justify-center space-y-12">
       <main className="flex-grow">
-        <Airdrop />
+        <AboutSolarHashToken />
+        <SolarHashTeam />
       </main>
     </div>
   );
