@@ -89,7 +89,10 @@ const BuyGuide = () => {
   }, []);
 
   return (
-    <section className="pt-32 pb-12 min-h-screen bg-teal-800 px-4 text-white flex flex-col items-center justify-center space-y-12">
+    <section
+      id="buy-guide"
+      className="pt-32 pb-12 min-h-screen bg-teal-800 px-4 text-white flex flex-col items-center justify-center space-y-12"
+    >
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}

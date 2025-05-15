@@ -24,8 +24,8 @@ const SOCIAL_LINKS = [
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "#lite-paper", label: "Litepaper" },
-  { href: "#project", label: "Projects" },
+  { href: "/about", label: "About Us" },
+  { href: "/projects", label: "Projects" },
   { href: "/guide", label: "Buying Guide" },
   { href: "/airdrop", label: "Airdrop" },
   { href: "#donate", label: "DONATE" },

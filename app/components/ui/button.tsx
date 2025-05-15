@@ -17,7 +17,7 @@ const buttonVariants: Record<Variant, string> = {
   default: "bg-teal-600 hover:bg-teal-700 text-white",
   outline: "border border-white text-white hover:bg-white hover:text-teal-800",
   secondary: "border border-orange-600 text-white hover:bg-teal-800",
-  action: "border border-grey-600 text-white bg-yellow-800 hover:bg-yellow-800",
+  action: "text-white bg-yellow-700 hover:bg-yellow-800",
   ghost: "bg-transparent text-white hover:bg-white/10",
   link: "bg-transparent text-white underline hover:text-yellow-400",
 };
