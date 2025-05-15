@@ -25,7 +25,7 @@ const projectList = [
 const Projects: React.FC = () => {
   const handleSupport = (title: string) => {
     console.log(`Funding project: ${title}`);
-    // Add wallet integration or modal here
+    //TODO: implement funding modal
   };
 
   const handleViewDetails = (title: string, pdf: string) => {
