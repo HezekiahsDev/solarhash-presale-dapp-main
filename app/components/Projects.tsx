@@ -1,6 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { motion } from "framer-motion";
 import ProjectCard from "./ProjectCard";
 
 const projectList = [
@@ -23,25 +26,35 @@ const projectList = [
 ];
 
 const Projects: React.FC = () => {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   const handleSupport = (title: string) => {
     console.log(`Funding project: ${title}`);
-    //TODO: implement funding modal
+    // TODO: implement funding modal
   };
 
   const handleViewDetails = (title: string, pdf: string) => {
     console.log(`Viewing details for: ${title}`);
-
     window.open(pdf, "_blank");
   };
 
   return (
-    <section className="pt-32 pb-12 min-h-screen bg-teal-800 px-4 text-white">
-      <div className="max-w-7xl mx-auto w-full flex flex-col items-center">
-        <h2 className="text-4xl font-bold mb-12 text-center">Our Projects</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-          {projectList.map((project, index) => (
+    <section className="pt-32 pb-12 min-h-screen bg-teal-800 px-4 text-white flex flex-col items-center justify-center space-y-12">
+      <motion.div
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-12"
+      >
+        <h2 className="text-4xl font-bold">Our Projects</h2>
+      </motion.div>
+
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {projectList.map((project, index) => (
+          <div key={index} data-aos="fade-up" data-aos-delay={index * 100}>
             <ProjectCard
-              key={index}
               title={project.title}
               year={project.year}
               status={project.status as "ongoing" | "finished"}
@@ -54,8 +67,8 @@ const Projects: React.FC = () => {
                   : undefined
               }
             />
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </section>
   );
