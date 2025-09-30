@@ -42,9 +42,8 @@ const WalletMultiButton = dynamic(
   { ssr: false }
 );
 
-// Set end time for the ICO
-const endTime = new Date("2025-05-30T23:59:59").getTime();
-
+// Set end time for the ICO (6 months from September 27, 2025)
+const ICO_END_DATE = new Date("2026-03-27T23:59:59");
 // Environment variables
 const ENV_PROGRAM_ID = process.env.NEXT_PUBLIC_PROGRAM_ID;
 const ENV_ICO_MINT = process.env.NEXT_PUBLIC_ICO_MINT;
@@ -343,16 +342,16 @@ const BuyTokens = () => {
         program.programId
       );
 
-      if (balance < solCost * 1e9 + 5000) {
-        alert(`Insufficient balance. Need ${solCost.toFixed(3)} SOL plus fee`);
-        gaEvent({
-          action: "purchase_failed",
-          category: "transaction",
-          label: "insufficient_balance",
-          value: tokenAmount,
-        });
-        return;
-      }
+      // if (balance < solCost * 1e9 + 5000) {
+      //   alert(`Insufficient balance. Need ${solCost.toFixed(3)} SOL plus fee`);
+      //   gaEvent({
+      //     action: "purchase_failed",
+      //     category: "transaction",
+      //     label: "insufficient_balance",
+      //     value: tokenAmount,
+      //   });
+      //   return;
+      // }
 
       if (!icoData || !icoData.admin) {
         alert("ICO data not available. Please try again later.");
@@ -531,7 +530,7 @@ const BuyTokens = () => {
       )}
       {/* Countdown Timer */}
       <div className="py-4">
-        <CountdownTimer targetDate={new Date("2025-05-30T23:59:59")} />
+        <CountdownTimer targetDate={ICO_END_DATE} />
       </div>
 
       {wallet.connected ? (

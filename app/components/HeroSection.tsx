@@ -1,4 +1,3 @@
-import "aos/dist/aos.css";
 import Welcome from "./Welcome";
 import BuyTokens from "./BuyTokens";
 
