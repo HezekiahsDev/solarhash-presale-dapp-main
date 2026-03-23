@@ -32,7 +32,7 @@ const LitePaper = () => {
     gaEvent({
       action: "download_litepaper",
       category: "litepaper",
-      label: text,
+      label: "view_litepaper",
       value: 1,
     });
     window.open(litepaperUrl, "_blank");
@@ -43,7 +43,7 @@ const LitePaper = () => {
     gaEvent({
       action: "download_litepaper",
       category: "litepaper",
-      label: text,
+      label: "download_litepaper",
       value: 1,
     });
     const link = document.createElement("a");
@@ -53,11 +53,11 @@ const LitePaper = () => {
   };
 
   return (
-    <div ref={dropdownRef} className="relative inline-block text-left">
+    <div ref={dropdownRef} className="relative inline-block text-left w-full">
       <Button
         onClick={toggleDropdown}
         variant="outline"
-        className=" text-white text-base font-semibold "
+        className="w-full text-white text-base font-semibold text-center"
       >
         Litepaper
       </Button>

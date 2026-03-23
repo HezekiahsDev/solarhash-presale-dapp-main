@@ -1,5 +1,4 @@
 import Welcome from "./Welcome";
-import BuyTokens from "./BuyTokens";
 
 const HeroSection = () => {
   return (
@@ -11,7 +10,7 @@ const HeroSection = () => {
       }}
     >
       <Welcome />
-      <BuyTokens />
+      {/* <BuyTokens /> */}
     </section>
   );
 };

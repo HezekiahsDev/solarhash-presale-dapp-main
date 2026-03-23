@@ -1,7 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import { useWallet } from "@solana/wallet-adapter-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Link from "next/link";
@@ -32,7 +30,6 @@ const NAV_LINKS = [
 ];
 
 const Navbar = () => {
-  const { connected } = useWallet();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -94,29 +91,10 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center space-x-2" data-aos="fade-left">
-          {connected && <span />}
-          <div className="ml-24">
-            <WalletMultiButton
-              style={{
-                backgroundColor: "#d48a23",
-                color: "white",
-                padding: "10px 20px",
-                fontSize: "16px",
-                fontWeight: "bold",
-                borderRadius: "8px",
-                border: "none",
-                cursor: "pointer",
-                transition: "background-color 0.3s ease",
-              }}
-              onClick={() =>
-                gaEvent({
-                  action: "click_connet_wallet",
-                  category: "wallet connect",
-                  label: "conect wallet",
-                })
-              }
-            />
-          </div>
+          {/* Wallet connect UI disabled while presale is off */}
+          <span className="ml-24 text-sm text-amber-200">
+            Wallet connection disabled
+          </span>
         </div>
 
         <button

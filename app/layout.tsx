@@ -2,7 +2,8 @@ import { ReactNode } from "react";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import WalletProviderWrapper from "./WalletProviderWrapper";
+// Wallet connection has been disabled
+// import WalletProviderWrapper from "./WalletProviderWrapper";
 import Script from "next/script";
 import Analytics from "./components/Analytics";
 
@@ -59,18 +60,17 @@ export default function Layout({ children }: LayoutProps) {
         />
       </head>
       <body className="h-full">
-        <WalletProviderWrapper>
-          {/* Track route changes */}
-          <Analytics />
+        {/* WalletProviderWrapper removed while presale is disabled */}
+        {/* <WalletProviderWrapper> */}
+        {/* Track route changes */}
+        <Analytics />
 
-          <div>
-            <Header />
-            <main className="h-fit items-center justify-center">
-              {children}
-            </main>
-            <Footer />
-          </div>
-        </WalletProviderWrapper>
+        <div>
+          <Header />
+          <main className="h-fit items-center justify-center">{children}</main>
+          <Footer />
+        </div>
+        {/* </WalletProviderWrapper> */}
       </body>
     </html>
   );

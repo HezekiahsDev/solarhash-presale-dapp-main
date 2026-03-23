@@ -45,27 +45,36 @@ const Welcome = () => {
           />
         </div>
 
-        {/* CTA Buttons */}
+        {/* Hero CTA and short pitch */}
         <div
-          className="flex flex-col sm:flex-row justify-center items-center gap-4"
+          className="flex flex-col items-center gap-6 max-w-3xl mx-auto"
           data-aos="fade-up"
           data-aos-delay="300"
         >
-          <LitePaper />
-          <Link href={"/guide"} data-aos="fade-right" data-aos-delay="300">
-            <Button variant="secondary">Buying Guide</Button>
-          </Link>
+          <div className="text-center max-w-2xl">
+            <p className="text-sm md:text-base text-teal-200">
+              Solar Hash Token (SHTP) funds and powers solar-driven mining and
+              clean-energy projects worldwide, delivering real value to holders
+              through low-cost hosting, airdrops, and transparent, community-led
+              financing.
+            </p>
+          </div>
 
-          <Link
-            className="glow-on-hover"
-            href={"/buy"}
-            data-aos="fade-right"
-            data-aos-delay="400"
-          >
-            <Button className="glow-on-hover" variant="action">
-              Buy Token
-            </Button>
-          </Link>
+          <div className="w-full max-w-2xl grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            <LitePaper />
+
+            <Link href="/about" data-aos="fade-right" data-aos-delay="350">
+              <Button className="w-full text-center" variant="action">
+                Join the Movement
+              </Button>
+            </Link>
+
+            <Link href="/projects" data-aos="fade-right" data-aos-delay="350">
+              <Button className="w-full text-center" variant="secondary">
+                View Projects
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </section>
