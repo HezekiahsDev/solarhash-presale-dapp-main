@@ -20,10 +20,12 @@ const BuyGuide = () => {
         transition={{ duration: 0.6 }}
         className="text-center"
       >
-        <h2 className="text-4xl font-bold mb-4">Presale Paused</h2>
+        <h2 className="text-4xl font-bold mb-4">Presale Temporarily Paused</h2>
         <p className="text-lg max-w-2xl mx-auto">
-          Presale steps and wallet connection instructions are temporarily
-          commented out. Check back later for updated purchase guidance.
+          The presale is temporarily paused as we complete final preparations
+          to ensure a secure and compliant token distribution. Please check
+          back soon or follow our official channels for updates and next
+          steps.
         </p>
       </motion.div>
     </section>

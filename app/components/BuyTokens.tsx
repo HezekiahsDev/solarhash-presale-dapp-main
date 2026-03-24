@@ -18,7 +18,7 @@ const BuyTokens = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        Presale Unavailable
+        Presale Temporarily Paused
       </motion.h1>
 
       <motion.p
@@ -27,8 +27,9 @@ const BuyTokens = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.1 }}
       >
-        Wallet connection, token purchases, and admin actions are commented out
-        while the presale is paused.
+        We are pausing the presale while we finalise security and compliance
+        checks. For the latest announcements and next steps, please visit our
+        About page or join our community channels.
       </motion.p>
     </div>
   );
